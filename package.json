@@ -1,0 +1,26 @@
+{
+  "name": "jsTester",
+  "version": "0.0.0",
+  "description": "Learn TDD by building a testing tool for JavaScript",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rawright/jsTester.git"
+  },
+  "keywords": [
+    "js",
+    "tdd",
+    "testing"
+  ],
+  "author": "rawright",
+  "license": "MI",
+  "bugs": {
+    "url": "https://github.com/rawright/jsTester/issues"
+  }
+}
