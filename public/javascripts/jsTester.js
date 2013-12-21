@@ -1,3 +1,4 @@
+var exports = exports || {};
 (function () {
   "use strict";
   var stats = {};
