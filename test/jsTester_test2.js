@@ -12,7 +12,7 @@ function assert(op1, op2) {
     console.log(e.name, e.message, op1, op2);
     return false;
   }
-};
+}
 describe('Test describe verb', function () {
   it('should save suite name in stats.suite', function () {
     expect(stats.suite).toBe('Test describe verb');

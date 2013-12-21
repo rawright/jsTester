@@ -11,20 +11,20 @@ var exports = exports || {};
     stats.suite = suite;
     console.log(suite);
     callback();
-  };
+  }
   function it(spec, callback) {
     stats.spec = spec;
     stats.specs += 1;
     console.log('\t' + 'it ' + spec);
     callback();
-  };
-  function expect(actual) {
-    if (!(this instanceof expect)) {
-      return new expect(actual);
+  }
+  function Expect(actual) {
+    if (!(this instanceof Expect)) {
+      return new Expect(actual);
     }
     this.actual = actual;
   }
-  expect.prototype.toBe = function (expected) {
+  Expect.prototype.toBe = function (expected) {
     if (expected !== this.actual) {
       stats.fails += 1;
       throw new Error('toBe compare mismatch');
@@ -34,6 +34,6 @@ var exports = exports || {};
   };
   exports.describe = describe;
   exports.it = it;
-  exports.expect = expect;
+  exports.Expect = expect;
   exports.stats = stats;
 }());

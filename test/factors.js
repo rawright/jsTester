@@ -14,4 +14,4 @@ exports.factors = function (n) {
     if (n > 1) arr.push(n);
   }
   return arr;
-}
+};

@@ -22,5 +22,9 @@
   "license": "MI",
   "bugs": {
     "url": "https://github.com/rawright/jsTester/issues"
+  },
+  "devDependencies": {
+    "grunt": "~0.4.2",
+    "grunt-contrib-jshint": "~0.7.2"
   }
 }
