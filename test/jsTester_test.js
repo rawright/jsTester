@@ -1,4 +1,5 @@
-var jsTester = require('../public/javascripts/jsTester'),
+var jsTester = typeof require === 'function' ?
+  require('../public/javascripts/jsTester') : exports,
   describe = jsTester.describe,
   it = jsTester.it,
   expect = jsTester.expect,
