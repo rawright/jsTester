@@ -9,11 +9,13 @@ var log = function (message) { console.log(message); };
   stats.suite = '';
   stats.spec = '';
   stats.specs = 0;
+  stats.suiteCallbacks = [];
   var env = {};
   function describe(suite, callback) {
     stats.suite = suite;
-    log(suite);
-    callback();
+    stats.suiteCallbacks.push({suite: suite, cb: callback});
+    //log(suite);
+    //callback();
   }
   function it(spec, callback) {
     stats.spec = spec;
@@ -43,4 +45,5 @@ var log = function (message) { console.log(message); };
   env.describe = describe;
   env.it = it;
   env.expect = Expect;
+  env.stats = stats;
 }());
