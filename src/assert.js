@@ -1,7 +1,7 @@
 var exports = exports || {};
 
 assert.showStats = function () {
-  console.log('Passes: ' + assert.passes, 'Fails: ' + assert.fails)
+  console.log('Passes: ' + assert.passes, 'Fails: ' + assert.fails);
 };
 assert.reset = function () {
   assert.passes = 0;

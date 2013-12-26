@@ -19,7 +19,7 @@
     "testing"
   ],
   "author": "rawright",
-  "license": "MI",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/rawright/jsTester/issues"
   },

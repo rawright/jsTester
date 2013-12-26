@@ -20,7 +20,16 @@ function test_Expectation() {
   assert(expect.passes, 1);
   assert(expect.fails, 1);
   assert(expect('string').toBeString(), true);
-  assert(expect({}).toBeString(), false);
+  assert(expect(1).not().toBe(2), true);
+  assert(expect(1).not().toBeString(), true);
+  assert(expect(1).toBeNumber(), true);
+  try {
+    expect(1).toBeString();
+  } catch (e) {
+    assert(e.message.substr(0, 11), 'toBeString:');
+  }
+  console.log('expect.passes: ' + expect.passes);
+  console.log('expect.fails: ' + expect.fails);
   assert.showStats();
 }
 
