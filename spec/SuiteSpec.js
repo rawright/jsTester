@@ -1,6 +1,3 @@
-var assert = require('../src/assert').assert,
-  describe = require('../src/Suite').Suite;
-
 assert.reset();
 function test_Suite() {
   assert(typeof describe, 'function');

@@ -1,5 +1,8 @@
-var assert = require('../src/assert').assert;
-require('../src/jsTesterRequire');
+if (typeof require === 'function') {
+  require('../src/jsTesterRequire');
+  var assert = require('../src/assert').assert;
+  console.log('hello', typeof jsTester);
+}
 
 assert.reset();
 assert(typeof jsTester, 'object');

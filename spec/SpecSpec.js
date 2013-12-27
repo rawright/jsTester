@@ -1,6 +1,3 @@
-var assert = require('../src/assert').assert,
-  it = require('../src/Spec').Spec;
-
 assert.reset();
 function test_Spec() {
   assert(typeof it, 'function');

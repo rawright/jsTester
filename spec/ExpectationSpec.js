@@ -1,7 +1,5 @@
 function test_Expectation() {
-  var assert = require('../src/assert').assert,
-    expect = require('../src/Expectation').Expectation;
-
+  "use strict";
   assert.reset();
 
   // describe Expectation
