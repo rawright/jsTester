@@ -34,17 +34,11 @@ function test_Expectation() {
     // it should pass if actual is not expected
     assert(expect(true).not().toBe(false), true);
 
-  // describe toBeString
-    // it should test for a string type
-    assert(expect('string').toBeString(), true);
+  // describe toBeArray
+    // it should test for an array type
+    assert(expect([]).toBeArray(), true);
     // it should support .not()
-    assert(expect(1).not().toBeString(), true);
-
-  // describe toBeNumber
-    // it should test for a number type
-    assert(expect(1).toBeNumber(), true);
-    // it should support .not()
-    assert(expect('a').not().toBeNumber(), true);
+    assert(expect({}).not().toBeArray(), true);
 
   // describe toBeFunction
     // it should test for a function type
@@ -52,11 +46,17 @@ function test_Expectation() {
     // it should support .not()
     assert(expect({}).not().toBeFunction(), true);
 
-  // describe toBeArray
-    // it should test for an array type
-    assert(expect([]).toBeArray(), true);
+  // describe toBeNull
+    // it should test for null
+    assert(expect(null).toBeNull(), true);
     // it should support .not()
-    assert(expect({}).not().toBeArray(), true);
+    assert(expect().not().toBeNull(), true);
+
+  // describe toBeNumber
+    // it should test for a number type
+    assert(expect(1).toBeNumber(), true);
+    // it should support .not()
+    assert(expect('a').not().toBeNumber(), true);
 
   // describe toBeObject
     // it should test for an object type
@@ -66,6 +66,12 @@ function test_Expectation() {
     // in should not show array as an object
     assert(expect([]).not().toBeObject(), true);
 
+  // describe toBeString
+    // it should test for a string type
+    assert(expect('string').toBeString(), true);
+    // it should support .not()
+    assert(expect(1).not().toBeString(), true);
+
   // describe toBeUndefined
     // it should test for type undefined
     assert(expect().toBeUndefined(), true);
@@ -73,12 +79,6 @@ function test_Expectation() {
     assert(expect('a').not().toBeUndefined(), true);
     // it should not handle null as undefined
     assert(expect(null).not().toBeUndefined(), true);
-
-  // describe toBeNull
-    // it should test for null
-    assert(expect(null).toBeNull(), true);
-    // it should support .not()
-    assert(expect().not().toBeNull(), true);
 
   console.log('expect.passes: ' + expect.passes);
   console.log('expect.fails: ' + expect.fails);

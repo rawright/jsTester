@@ -9,5 +9,10 @@ Use Jasmine syntax:
 * expect
 * expect().not() - workaround for now
 * toBe
-* toBeString
+* toBeArray
+* toBeFunction
+* toBeNull
 * toBeNumber
+* toBeObject
+* toBeString
+* toBeUndefined
