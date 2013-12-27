@@ -11,10 +11,29 @@ module.exports = function(grunt) {
           document: true
         }
       }
-    }
+    },
+    concat: {
+      options: {
+        separator: "\n",
+        stripBanners: true,
+        banner:'/*! <%= pkg.name %> - v<%= pkg.version %> - ' +
+          '<%= grunt.template.today("yyyy-mm-dd") %>\n' +
+          '<%= pkg.description %> */\n\n',
+      },
+      dist: {
+        src: [
+          'src/Suite.js',
+          'src/Spec.js',
+          'src/Expectation.js'
+          ],
+        dest: 'dist/jsTester.js',
+      },
+    },
   });
   grunt.loadNpmTasks('grunt-contrib-jshint');
+  grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.registerTask('test', ['jshint']);
   grunt.registerTask('lint', ['jshint']);
-  grunt.registerTask('default', ['jshint']);
+  grunt.registerTask('dist', ['concat']);
+  grunt.registerTask('default', ['jshint', 'concat']);
 };

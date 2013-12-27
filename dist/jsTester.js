@@ -1,3 +1,33 @@
+/*! jsTester - v0.0.1 - 2013-12-27
+Learn TDD by building a testing tool for JavaScript */
+
+var exports = exports || {};
+Suite.suites = 0;
+function Suite(suite, callback) {
+  if (!(this instanceof Suite)) {
+    return new Suite(suite, callback);
+  }
+  Suite.suites += 1;
+  this.suite = suite || '';
+  if (typeof callback === 'function') callback();
+}
+
+exports.Suite = Suite;
+
+var exports = exports || {};
+
+Spec.specs = 0;
+function Spec(spec, callback) {
+  if (!(this instanceof Spec)) {
+    return new Spec(spec, callback);
+  }
+  this.spec = spec || '';
+  Spec.specs += 1;
+  if (typeof callback === 'function') callback();
+}
+
+exports.Spec = Spec;
+
 var exports = exports || {};
 
 Expectation.passes = 0;

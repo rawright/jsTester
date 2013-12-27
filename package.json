@@ -1,6 +1,6 @@
 {
   "name": "jsTester",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Learn TDD by building a testing tool for JavaScript",
   "main": "index.js",
   "directories": {
@@ -25,6 +25,7 @@
   },
   "devDependencies": {
     "grunt": "~0.4.2",
-    "grunt-contrib-jshint": "~0.7.2"
+    "grunt-contrib-jshint": "~0.7.2",
+    "grunt-contrib-concat": "~0.3.0"
   }
 }

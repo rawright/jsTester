@@ -7,6 +7,7 @@ Use Jasmine syntax:
 * describe
 * it
 * expect
-* expect().not
+* expect().not() - workaround for now
 * toBe
 * toBeString
+* toBeNumber
