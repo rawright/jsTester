@@ -1,4 +1,4 @@
-/*! jsTester - v0.0.1 - 2013-12-27
+/*! jsTester - v0.0.1 - 2013-12-28
 Learn TDD by building a testing tool for JavaScript */
 
 (function () {
