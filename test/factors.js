@@ -1,7 +1,5 @@
 function setup_tests() {
-  if (typeof module === 'object' && module.exports) {
-    require('../public/javascripts/jsTester');
-  }
+  require('../dist/jsTester');
 }
 
 function factors_tests() {
@@ -69,6 +67,11 @@ function countPrimes(start, end) {
 
 exports.factors = factors;
 // Run tests
+console.log('setup_tests');
 setup_tests();
+console.log('factors_tests');
 factors_tests();
+console.log('primes_tests');
 countPrimes_tests();
+console.log('Passes: ' + expect.passes);
+console.log('Fails: ' + expect.fails);
