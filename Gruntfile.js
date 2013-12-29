@@ -22,9 +22,7 @@ module.exports = function(grunt) {
       },
       dist: {
         src: [
-          'src/Suite.js',
-          'src/Spec.js',
-          'src/Expectation.js'
+          'src/jsTester.js'
           ],
         dest: 'dist/jsTester.js',
       },

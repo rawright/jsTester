@@ -1,6 +1,3 @@
-/*! jsTester - v0.0.1 - 2013-12-28
-Learn TDD by building a testing tool for JavaScript */
-
 function jsTester(options) {
   "use strict";
   var that = options || {};
