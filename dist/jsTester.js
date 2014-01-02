@@ -1,13 +1,16 @@
-/*! jsTester - v0.0.1 - 2013-12-28
+/*! jsTester - v0.0.1 - 2014-01-02
 Learn TDD by building a testing tool for JavaScript */
 
 function jsTester(options) {
   "use strict";
   var that = options || {};
+  that.env = global;
   that.suites = [];
   that.i = -1;
   that.j = -1;
   describe.cnt = 0;
+  that.env.xdescribe = function () {};
+  that.env.describe = describe;
   return describe;
 
   function describe (suite, cb) {

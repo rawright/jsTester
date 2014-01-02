@@ -1,12 +1,13 @@
 require('../src/assert');
 assert.reset();
 function test_jsTester() {
-  var jsTester = require('../src/jsTester').jsTester,
-    describe = jsTester();
+  var options = {},
+    testDescribe = require('../src/jsTester').jsTester(options);
 
   describe('jsTester', function (it) {
     it('should return access to describe', function (expect) {
       assert(expect(typeof describe).toBe('function'), true);
+      assert(expect(describe).toBe(testDescribe), true);
     });
   });
 
@@ -23,7 +24,7 @@ function test_jsTester() {
   });
 
   describe('expect', function (it) {
-    it('should return it\' context for chaining', function (expect) {
+    it('should return it\'s context for chaining', function (expect) {
       assert(expect(typeof expect().toBe).toBe('function'), true);
     });
   });
@@ -45,6 +46,15 @@ function test_jsTester() {
       assert(expect(1).not.toBe(1), false);
     });
   });
+
+  xdescribe('toThrow', function (it) {
+    var throwError = function () { throw new Error('test toThrow'); },
+      doNotThrowError = function () { return; };
+    it('should return false if test does not throw an error', function (expect) {
+      assert(expect(doNotThrowError()).toThrow(), false);
+    });
+  });
+      
 
 /*
   assert(typeof jsTester, 'function');
