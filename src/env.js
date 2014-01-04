@@ -5,10 +5,8 @@ var exports = exports || {};
 
   if (typeof module !== 'undefined' && module.exports) {
     env = global;
-    console.log('global');
   } else if (typeof window !== 'undefined') {
     env = window;
-    console.log('window');
   }
 
   env.describe = exports.Suite;
