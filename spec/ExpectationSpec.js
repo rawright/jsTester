@@ -1,86 +1,154 @@
 function test_Expectation() {
-  "use strict";
-  assert.reset();
+  require('../src/jsTester');
 
-  // describe Expectation
-    // it should be a function
-    assert(typeof expect, 'function');
-    // it should tally passes and fails
-    assert(expect.passes, 0);
-    assert(expect.fails, 0);
-    // it should return an object
-    assert(typeof expect(), 'object');
-    // it should store the actual value
-    assert(expect('actual').actual, 'actual');
+  describe('Expectation', function () {
+    it('should provide global access to expect', function () {
+      expect(expect).toBeFunction();
+    });
+    
+    it('should tally passes and fails and expected fails', function () {
+      var passes = expect.passes,
+        fails = expect.fails,
+        expectedFails = expect.expectedFails;
+      expect(1).toBe(1);
+      expect(1).expectFail().toBe(2);
+      expect(expect.passes).toBe(passes + 2);
+      expect(expect.fails).toBe(fails);
+      expect(expect.expectedFails).toBe(expectedFails + 1);
+    });
 
-  // describe toBe
-    // it should match the actual value to an expected value
-    assert(expect('actual').toBe('actual'), true);
-    // it should throw an Error if actual does not equal expected
-    try {
-      expect('actual').toBe('not actual');
-      assert('should have thrown Error', 'did not throw Error');
-    } catch (e) {
-      assert(e.name, 'Error');
-      assert(e.message.substr(0, 5), 'toBe:');
-    }
-    // it should update passes and fails tallies
-    assert(expect.passes, 1);
-    assert(expect.fails, 1);
+    it('should return it\'s object for piping', function () {
+      expect(expect()).toBeObject();
+    });
 
-  // describe expect.not().toBe()
-    // it should pass if actual is not expected
-    assert(expect(true).not().toBe(false), true);
+    it('should store the actual value', function () {
+      var fails = expect.fails;
+      expect(expect('actual').actual).toBe('actual');
+    });
+  });
 
-  // describe toBeArray
-    // it should test for an array type
-    assert(expect([]).toBeArray(), true);
-    // it should support .not()
-    assert(expect({}).not().toBeArray(), true);
+  describe('expectFail()', function () {
+    it('should pass when the test fails', function () {
+      var passes = expect.passes;
+      expect(1).expectFail().toBe(2);
+      expect(expect.passes).toBe(passes + 1);
+    });
 
-  // describe toBeFunction
-    // it should test for a function type
-    assert(expect(expect).toBeFunction(), true);
-    // it should support .not()
-    assert(expect({}).not().toBeFunction(), true);
+    it('should return false when the test fails', function () {
+      expect((expect(true).expectFail().toBe(false))).toBe(false);
+    });
 
-  // describe toBeNull
-    // it should test for null
-    assert(expect(null).toBeNull(), true);
-    // it should support .not()
-    assert(expect().not().toBeNull(), true);
+    it('should tally both passes and expectedFails', function () {
+      var passes = expect.passes,
+        fails = expect.fails,
+        expectedFails = expect.expectedFails;
+      expect(true).expectFail().toBe(false);
+      expect(expect.passes).toBe(passes + 1);
+      expect(expect.fails).toBe(fails);
+      expect(expect.expectedFails).toBe(expectedFails + 1);
+    });
+  });
 
-  // describe toBeNumber
-    // it should test for a number type
-    assert(expect(1).toBeNumber(), true);
-    // it should support .not()
-    assert(expect('a').not().toBeNumber(), true);
+  describe('toBe', function () {
+    it('should match the actual value to an expected value', function () {
+      expect((expect('actual').toBe('actual'))).toBe(true);
+    });
 
-  // describe toBeObject
-    // it should test for an object type
-    assert(expect({}).toBeObject(), true);
-    // it should support .not()
-    assert(expect(true).not().toBeObject(), true);
-    // in should not show array as an object
-    assert(expect([]).not().toBeObject(), true);
+    it('should return false if values do not match', function () {
+      expect((expect('actual').expectFail().toBe('not actual'))).toBe(false);
+    });
+  });
 
-  // describe toBeString
-    // it should test for a string type
-    assert(expect('string').toBeString(), true);
-    // it should support .not()
-    assert(expect(1).not().toBeString(), true);
+  describe('expect.not().toBe()', function () {
+    it('should return true if actual does not equal expected', function () {
+      expect((expect(true).not().toBe(false))).toBe(true);
+    });
+  });
 
-  // describe toBeUndefined
-    // it should test for type undefined
-    assert(expect().toBeUndefined(), true);
-    // it should support .not()
-    assert(expect('a').not().toBeUndefined(), true);
-    // it should not handle null as undefined
-    assert(expect(null).not().toBeUndefined(), true);
+  describe('toBeArray', function () {
+    it('should pass if actual is an array', function () {
+      expect([]).toBeArray();
+      expect({}).not().toBeArray();
+    });
+  });
 
-  console.log('expect.passes: ' + expect.passes);
-  console.log('expect.fails: ' + expect.fails);
-  assert.showStats();
+  describe('toBeFunction', function () {
+    it('should pass if actual is a function', function () {
+      expect(function() {}).toBeFunction();
+      expect({}).not().toBeFunction();
+    });
+  });
+    
+  describe('toBeNull', function () {
+    it('should pass if actual is null', function () {
+      expect(null).toBeNull();
+      expect().not().toBeNull();
+      expect(0).not().toBeNull();
+      expect('').not().toBeNull();
+      expect({}).not().toBeNull();
+    });
+  });
+    
+  describe('toBeNumber', function () {
+    it('should pass if actual is a number', function () {
+      expect(0).toBeNumber();
+      expect(10).toBeNumber();
+      expect(-10).toBeNumber();
+      expect(1.234).toBeNumber();
+      expect(-1.234).toBeNumber();
+      expect('a').not().toBeNumber();
+      expect('').not().toBeNumber();
+      expect({}).not().toBeNumber();
+      expect({}).expectFail().toBeNumber();
+    });
+  });
+    
+  describe('toBeObject', function () {
+    it('should pass if actual is an object', function () {
+      expect({}).toBeObject();
+      expect([]).expectFail().toBeObject();
+      expect(function () {}).expectFail().toBeObject();
+    });
+  });
+
+  describe('toBeString', function () {
+    it('should pass if actual is a string', function () {
+      expect("string").toBeString();
+      expect('string').toBeString();
+      expect('string' + 22).toBeString();
+      expect(22 + 'string').toBeString();
+      expect(0).expectFail().toBeString();
+      expect(9).expectFail().toBeString();
+      expect({}).expectFail().toBeString();
+    });
+  });
+
+  describe('toThrow', function () {
+    it('should pass if the function passed in actual throws an error', function () {
+      var f1 = function () { throw new Error('Test Error'); },
+        f2 = function () {};
+      expect(f1).toThrow();
+      expect(f2).expectFail().toThrow();
+    });
+    
+    it('should take parameters to the function via an array', function () {
+      var f3 = function (a, b, c) { if (c === 'c') throw new Error('Needs parms'); };
+      expect([f3, 'a', 'b', 'c']).toThrow();
+      expect([f3, 'a', 'b', function() { return 'c'; }()]).toThrow();
+      expect([f3, 'a', 'b', 'x']).expectFail().toThrow();
+      expect([f3, 'a', 'b']).expectFail().toThrow();
+    });
+  });
+
+  describe('toBeUndefined', function () {
+    it('should pass if actual is a undefined', function () {
+      expect().toBeUndefined();
+      expect(0).expectFail().toBeString();
+      expect('a').expectFail().toBeString();
+      expect('').expectFail().toBeString();
+      expect({}).expectFail().toBeString();
+    });
+  });
 }
 
 test_Expectation();

@@ -1,17 +1,30 @@
-assert.reset();
 function test_Spec() {
-  assert(typeof it, 'function');
-  assert(it.specs, 0);
-  assert(typeof it('spec1'), 'object');
-  var a = 1;
-  it('spec2', function () {
-    a = 2;
+  require('../src/jsTester');
+
+  describe('Spec', function () {
+    it('should provide global access to it', function () {
+      expect(it).toBeFunction();
+    });
+
+    it('should track the number of specs', function () {
+      var specs = it.specs;
+      it('dummy spec');
+      expect(it.specs).toBe(specs + 1);
+    });
+
+    it('should not invoke callback if callback not in args', function () {
+      var specs = it.specs;
+      it('dummy spec 2');
+      expect(it.specs).toBe(specs + 1);
+    });
+
+    it('should log it\'s name', function () {
+      var n = describe.logQueue.length;
+      it('dummy spec 3');
+      expect(describe.logQueue[n]).toBe('  dummy spec 3');
+    });
   });
-  assert(a, 2);
-  assert(it.specs, 2);
-  assert(it('spec3').spec, 'spec3');
-  assert(it().spec, '');
-  assert.showStats();
+
 }
 
 test_Spec();
